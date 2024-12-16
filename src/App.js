@@ -12,7 +12,7 @@ import {
 import Header from "./components/header/header";
 import Home from "./pages/home";
 import ErrorPage from "./pages/errorPage";
-
+import Mypage from "./pages/mypage";
 import LoginPopup from "./components/login/loginPopup";
 import UserSignupPopup from "./components/signup/UserSignupPopup";
 import AgentSignupPopup from "./components/signup/AgentSignupPopup";
@@ -33,6 +33,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPopup onClose={() => navigate("/")} />} />
+        <Route path="/mypage" element={<Mypage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       {loginPopupOpen && (

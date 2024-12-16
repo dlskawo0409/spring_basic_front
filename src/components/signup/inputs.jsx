@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
@@ -199,45 +199,16 @@ export const NicknameInput = ({ nickname, setNickname }) => {
   );
 };
 
-export const GenderInput = ({ gender, setGender }) => {
-  const onGenderChange = (e) => {
-    setGender(GENDER[e.target.value]);
-  };
-  return (
-    <div className="flex w-full my-5">
-      <div className="flex w-[50%] space-x-3 ">
-        <input
-          type="radio"
-          name="gender"
-          checked={gender === "MALE"}
-          value={0}
-          onChange={onGenderChange}
-        />
-        <div>남성</div>
-      </div>
-      <div className="flex w-[50%] space-x-3">
-        <input
-          type="radio"
-          name="gender"
-          checked={gender === "FEMALE"}
-          value={1}
-          onChange={onGenderChange}
-        />
-        <div>여성</div>
-      </div>
-    </div>
-  );
-};
+
 
 export const ImageInput = ({ imgFile, setImgFile, isMypage }) => {
   const imgRef = useRef(null);
-  const [previewImg, setPreviewImg] = useState(null);
+  const [previewImg, setPreviewImg] = useState(imgFile);
 
   const saveImgFile = () => {
     if (imgRef.current && imgRef.current.files) {
       const file = imgRef.current.files[0];
       setImgFile(file);
-
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
@@ -249,6 +220,10 @@ export const ImageInput = ({ imgFile, setImgFile, isMypage }) => {
   const handleClickImage = () => {
     imgRef.current.click();
   };
+
+  useEffect(() => {
+    setPreviewImg(imgFile);
+  }, [imgFile]);
 
   return (
     <div className="flex flex-col items-center justify-center">

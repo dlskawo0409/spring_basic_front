@@ -1,13 +1,26 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
+import { SubmitLoginWithCookie } from "../api/auth";
+import { useSetRecoilState } from "recoil";
+import { accessTokenState, isKakaoLogin } from "../recoil/atoms";
 
 
 const Home = () => {
-  const asideRef = useRef(null); // Aside를 참조하기 위한 ref
+  const setAccessToken = useSetRecoilState(accessTokenState);
 
-  // Hero에서 전달된 버튼 클릭 시 Aside로 스크롤 이동
-  const scrollToAside = () => {
-    asideRef.current?.scrollIntoView({ behavior: "smooth" });
+  const GetHeader = async () => {
+    const response = await SubmitLoginWithCookie();
+
+    localStorage.setItem("accessToken", response);
+    setAccessToken(response);
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("oauth2") === "true") {
+      GetHeader();
+      console.log("i am here");
+    }
+  }, []);
+
 
   return (
     <div className="flex flex-col h-auto bg-gradient-to-b from-gray-100 to-gray-200">

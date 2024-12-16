@@ -64,9 +64,7 @@ const AgentSignupPopup = ({ onClose }) => {
         <PasswordInput setPassword={setPassword} />
         <PasswordCheckInput password={password} setPasswordCheck={setPasswordCheck} />
         <NicknameInput nickname={nickname} setNickname={setNickname} />
-        <div className="flex flex-row">
-          <GenderInput gender={gender} setGender={setGender} />
-        </div>
+
         <SignupBtn onClick={submitForm} />
         <div className="border-b border-gray-2 my-2"></div>
         <KakaoLoginBtn className="my-2" />

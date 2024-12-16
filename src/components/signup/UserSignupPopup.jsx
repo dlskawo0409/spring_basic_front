@@ -37,7 +37,7 @@ const UserSignupPopup = ({ onClose }) => {
       return;
     }
     try {
-      const response = await SubmitSignup(email, password, nickname, gender, role, imgFile);
+      const response = await SubmitSignup(email, password, nickname, imgFile);
       console.log(response);
       setUserSignupPopupOpen(false);
       setLoginPopupOpen(false);
